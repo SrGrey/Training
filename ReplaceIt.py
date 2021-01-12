@@ -1,4 +1,4 @@
-
+# Script for change character in any string
 def replacement():
     symbol_to_change = input('Which character need to change? ')
     symbol_to_place = input('Which character need to place instead? ')
