@@ -19,3 +19,15 @@ Query result:
 +------------+--------------------+------------------+
 Affected rows: 5
 Свернуть
+
+Intresting optimization cutting result by genre:
+
+SELECT name_genre,
+       title,
+       name_author
+  FROM (SELECT *
+          FROM genre
+         WHERE name_genre = 'Роман') AS genre
+       JOIN book USING(genre_id)
+       JOIN author USING(author_id)
+ ORDER BY title ASC;
