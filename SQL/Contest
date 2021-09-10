@@ -1,21 +1,23 @@
 SELECT 
 	DATE(date,'start of month') AS monthDate,
 	description,
-	(SELECT name FROM statistic) AS item_name,
-   	(SELECT name FROM categories WHERE name != 'Варочные панели' OR name != 'Садовые измельчители') AS category_name,
-       (SELECT name FROM brands WHERE name != 'Apple' OR name != 'Samsung') AS brand_name,
-        SUM(shows) AS sum_shows,
+	statistic.name AS item_name,
+    categories.name AS category_name,
+    brands.name AS brand_name,
+    SUM(shows) AS sum_shows,
 	SUM(clicks) AS sum_clicks,
 	SUM(orders) AS sum_orders,
 	SUM(gmv) AS sum_gmv
 
 FROM statistic
-    INNER JOIN categories ON statistic.category_id = categories.id
+	INNER JOIN categories ON statistic.category_id = categories.id
     INNER JOIN brands ON statistic.brand_id = brands.id
      
 WHERE date BETWEEN '2021-04-01' AND '2021-07-31' 
       AND clicks BETWEEN shows AND orders 
-GROUP BY DATE(date,'start of month'), description, statistic.name, category_id, brand_id
+      AND categories.name != 'Варочные панели' OR categories.name != 'Садовые измельчители'
+      AND brands.name != 'Apple' OR brands.name != 'Samsung'
+GROUP BY DATE(date,'start of month'), description, statistic.name, statistic.category_id, statistic.brand_id
 ORDER BY monthDate, sum_gmv DESC
 LIMIT 100;
 
