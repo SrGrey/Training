@@ -5,7 +5,8 @@
 ''' Write the classes:
 
 AbstractCat class, which is initialized with no arguments. Is able to:
-*eat* eat. For every 10 units of food, the weight increases by 1 unit until it becomes 100, and does not grow further. If at one meal the amount of food is not a multiple of 10, the remainder is stored, and then added to the new meal.
+*eat* eat. For every 10 units of food, the weight increases by 1 unit until it becomes 100, and does not grow further. 
+If at one meal the amount of food is not a multiple of 10, the remainder is stored, and then added to the new meal.
 - return a string representation as <Class name> (weight).
 
 Kitten class, inherited from cat with weight argument. Knows how to meow subtly:
@@ -17,10 +18,13 @@ Class Cat, inherited from a kitten with weight and name arguments. Knows how to 
 and return your name (get_name). Also knows how to catch mice:
 *catch_mice** returns a string: Got it! '''
 
-class AbstractCat:
+from abc import ABC, abstractmethod
+
+class AbstractCat(ABC):
     # grow limit
     max_weight = 100
-
+    
+    @abstractmethod
     def __init__(self):
         self.food = 0
         self.weight = 0
