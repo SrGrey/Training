@@ -1,3 +1,11 @@
+''' Problem:
+- Parse text datafile DNI, SEX, NAME with ; as dilimter.
+- Datas presente in next format:   $DNI; SEX; Name@ 
+SEX representes as M (masculine) or F (feminine)
+- Create filter by SEX field
+- Print result using filter
+'''
+
 import csv
 
 # setting datas delimiter
