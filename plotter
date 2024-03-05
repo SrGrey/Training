@@ -1,0 +1,28 @@
+'''Yandex contest
+output the length of the drawn segments
+'''
+
+n, m = map(int, input().split())
+command_num = input()
+trayectory = input()
+
+def move(point, direction):
+    if direction == 'R':
+        return {'x': point['x'], 'y': point['y'] + 1}
+    elif direction == 'L':
+        return {'x': point['x'], 'y': point['y'] - 1}
+    elif direction == 'U':
+        return {'x': point['x'] + 1, 'y': point['y']}
+    elif direction == 'D':
+        return {'x': point['x'] - 1, 'y': point['y']}
+
+current_point = {'x': 0, 'y': 0}
+way = set()
+
+for character in trayectory:
+    new_point = move(current_point, character)
+    way.add(tuple(sorted([(current_point['x'], current_point['y']), (new_point['x'], new_point['y'])])))
+    current_point = new_point
+
+
+print(len(way))
